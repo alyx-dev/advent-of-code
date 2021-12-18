@@ -1,5 +1,5 @@
 [workspace]
-members = []
+members = ["aoc_*/day_*"]
 
 [package]
 name = "aoc"
@@ -7,3 +7,5 @@ version = "1.0.0"
 edition = "2021"
 
 [dependencies]
+anyhow = "1"
+isahc = {version = "1", features = ["cookies"] }
