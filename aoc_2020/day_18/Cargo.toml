@@ -1,0 +1,11 @@
+[package]
+name = "aoc_2020_day_18"
+version = "1.0.0"
+edition = "2021"
+description = "Advent of Code 2020-18"
+repository = "https://github.com/alyx-dev/advent-of-code"
+license = "MIT"
+
+[dependencies]
+anyhow = "1"
+aoc = { path = "../.." }
