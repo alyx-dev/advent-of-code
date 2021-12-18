@@ -17,9 +17,7 @@ fn main() -> Result<()> {
 
 fn client(cookie: &str) -> Result<HttpClient> {
     let cookie = format!("session={}", cookie);
-    let client = HttpClient::builder()
-        .default_header("Cookie", cookie)
-        .build()?;
+    let client = HttpClient::builder().default_header("Cookie", cookie).build()?;
     Ok(client)
 }
 
