@@ -1,6 +1,6 @@
 use std::collections::HashSet;
 
-use anyhow::{anyhow, Result};
+use anyhow::{Context, Result};
 
 pub const YEAR: u32 = 2018;
 pub const DAY: u32 = 1;
@@ -8,10 +8,7 @@ pub const DAY: u32 = 1;
 pub fn part_one(input: &str) -> Result<i32> {
     let mut frequency = 0i32;
     for change in input.trim().lines() {
-        match change.parse::<i32>() {
-            Ok(change) => frequency += change,
-            Err(_) => return Err(anyhow!("invalid frequency change: '{}'", change)),
-        }
+        frequency += change.parse::<i32>().with_context(|| format!("invalid frequency change: '{}'", change))?;
     }
     Ok(frequency)
 }
@@ -21,14 +18,9 @@ pub fn part_two(input: &str) -> Result<i32> {
     let mut seen = HashSet::new();
     seen.insert(frequency);
     for change in input.trim().lines().cycle() {
-        match change.parse::<i32>() {
-            Ok(change) => {
-                frequency += change;
-                if !seen.insert(frequency) {
-                    return Ok(frequency);
-                }
-            }
-            Err(_) => return Err(anyhow!("invalid frequency change: '{}'", change)),
+        frequency += change.parse::<i32>().with_context(|| format!("invalid frequency change: '{}'", change))?;
+        if !seen.insert(frequency) {
+            return Ok(frequency);
         }
     }
     unreachable!();
